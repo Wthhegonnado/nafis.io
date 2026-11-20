@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#05050b">
+<meta name="description" content="Nafis — a small universe of fiction, psychology, space, strategy and everything in between.">
+<title>Nafis — Somewhere in the Universe</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#05050b;--panel:#10101b;--ink:#f3f1ff;--muted:#aaa8bd;--violet:#a78bfa;--cyan:#8be9fd;--pink:#ff8fc7;--line:#ffffff20}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;scroll-padding-top:90px}
+body{background:var(--bg);color:var(--ink);font-family:'Manrope',sans-serif;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+button{font:inherit}
+::selection{background:#a78bfa55;color:#fff}
+#starfield{position:fixed;inset:0;z-index:-5;pointer-events:none;background:
+ radial-gradient(1px 1px at 8% 18%,#fff 99%,transparent),
+ radial-gradient(1px 1px at 21% 76%,#fff 99%,transparent),
+ radial-gradient(1px 1px at 38% 32%,#fff 99%,transparent),
+ radial-gradient(1px 1px at 61% 14%,#fff 99%,transparent),
+ radial-gradient(1px 1px at 78% 66%,#fff 99%,transparent),
+ radial-gradient(1px 1px at 91% 29%,#fff 99%,transparent),
+ radial-gradient(1px 1px at 48% 88%,#fff 99%,transparent),
+ radial-gradient(1px 1px at 13% 52%,#fff 99%,transparent),
+ radial-gradient(1px 1px at 70% 43%,#fff 99%,transparent),
+ radial-gradient(1px 1px at 31% 8%,#fff 99%,transparent),
+ radial-gradient(1px 1px at 95% 91%,#fff 99%,transparent),
+ radial-gradient(1px 1px at 54% 57%,#fff 99%,transparent),
+ linear-gradient(180deg,#070711,#05050b 70%)}
+#starfield:after{content:"";position:absolute;inset:0;background-image:radial-gradient(#a78bfa33 .7px,transparent .7px);background-size:53px 53px;opacity:.45;animation:starDrift 90s linear infinite}
+@keyframes starDrift{to{background-position:180px 240px}}
+.ambient{position:fixed;z-index:-4;width:46vw;height:46vw;border-radius:50%;filter:blur(95px);opacity:.13;pointer-events:none}
+.ambient.one{background:#6842c2;top:12%;left:-25vw}.ambient.two{background:#185b83;right:-28vw;top:58%}
+nav{position:fixed;z-index:50;inset:0 0 auto;height:74px;padding:0 7vw;display:flex;align-items:center;justify-content:space-between;background:#070711c9;border-bottom:1px solid #ffffff12;backdrop-filter:blur(18px)}
+.brand{font-family:'Space Grotesk',sans-serif;font-weight:700;letter-spacing:.08em;font-size:18px}.brand span{color:var(--violet)}
+.navlinks{display:flex;gap:28px}.navlinks a{font:10px 'DM Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);transition:.2s}.navlinks a:hover{color:var(--cyan)}
+.menu{display:none;color:var(--ink);background:none;border:1px solid var(--line);padding:8px 11px;border-radius:8px}
+.hero{min-height:100vh;position:relative;display:flex;align-items:center;padding:130px 9vw 90px;isolation:isolate;overflow:hidden}
+.hero:before{content:"";position:absolute;inset:0;z-index:-2;background:radial-gradient(ellipse at 75% 48%,#31205d44,transparent 42%),linear-gradient(90deg,#05050bf5 0%,#05050b99 62%,#05050b55)}
+.hero-inner{width:100%;max-width:1250px;margin:auto;display:grid;grid-template-columns:minmax(0,1.1fr) minmax(270px,.9fr);gap:6vw;align-items:center}
+.eyebrow,.mono{font-family:'DM Mono',monospace;letter-spacing:.18em;text-transform:uppercase}
+.eyebrow{font-size:11px;color:var(--cyan);margin-bottom:24px}
+.eyebrow:before{content:"✦ ";color:var(--pink)}
+h1{font-family:'Space Grotesk',sans-serif;font-size:clamp(64px,10vw,132px);line-height:.88;letter-spacing:-.085em;font-weight:700}
+h1 span{display:block;color:transparent;-webkit-text-stroke:1px #c5b4ff;text-shadow:0 0 40px #a78bfa30}
+.hero-copy{max-width:540px;color:var(--muted);font-size:15px;line-height:1.9;margin-top:30px}
+.hero-meta{display:flex;gap:12px;flex-wrap:wrap;margin-top:28px}
+.pill{border:1px solid #ffffff24;background:#ffffff08;padding:9px 13px;border-radius:999px;color:#d9d4ef;font:10px 'DM Mono',monospace;letter-spacing:.08em}
+.hero-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:34px}
+.btn{padding:13px 18px;border-radius:8px;font:10px 'DM Mono',monospace;letter-spacing:.12em;text-transform:uppercase;transition:.25s}
+.btn.primary{background:var(--violet);color:#100c1d;border:1px solid var(--violet)}.btn.secondary{border:1px solid #ffffff38;color:var(--ink)}
+.btn:hover{transform:translateY(-3px);box-shadow:0 10px 30px #a78bfa25}
+.profile-wrap{display:flex;justify-content:center;position:relative}
+.profile-orbit{width:min(32vw,370px);aspect-ratio:1;border:1px solid #a78bfa66;border-radius:50%;display:grid;place-items:center;position:relative;box-shadow:0 0 80px #8d6bdb18,inset 0 0 50px #8d6bdb13;animation:slowSpin 34s linear infinite}
+.profile-orbit:before,.profile-orbit:after{content:"";position:absolute;border:1px solid #8be9fd45;border-radius:50%;inset:10%;transform:rotateX(68deg) rotate(-24deg)}
+.profile-orbit:after{inset:-8%;border-color:#ff8fc744;transform:rotateX(70deg) rotate(28deg)}
+@keyframes slowSpin{to{transform:rotate(360deg)}}
+.profile{width:70%;height:70%;border-radius:50%;overflow:hidden;border:2px solid #c4b5fd;background:radial-gradient(circle,#38285b,#11101b 70%);box-shadow:0 0 35px #a78bfa55;position:relative;z-index:1}
+.profile img{width:100%;height:100%;object-fit:cover;display:block}
+.profile-fallback{display:none;width:100%;height:100%;align-items:center;justify-content:center;font:44px 'Space Grotesk',sans-serif;color:#d8c9ff}
+.orbit-dot{position:absolute;width:12px;height:12px;border-radius:50%;background:var(--cyan);box-shadow:0 0 20px var(--cyan);top:14%;right:13%}
+.blackhole{position:absolute;z-index:-1;width:min(43vw,570px);aspect-ratio:1;right:4%;top:50%;transform:translateY(-50%);pointer-events:none;opacity:.82;filter:drop-shadow(0 0 45px #7d49cb55)}
+.bh-glow{position:absolute;inset:8%;border-radius:50%;background:conic-gradient(from 30deg,transparent 0 8%,#bda0ff 12%,#ff9dcf 18%,#6ce5ff 24%,transparent 32% 54%,#9d77ff 62%,#ffb3dc 70%,transparent 82%);filter:blur(18px);animation:bhSpin 12s linear infinite}
+.bh-ring{position:absolute;inset:19% 3%;border-radius:50%;border:18px solid transparent;border-top-color:#e3b4ff;border-bottom-color:#8be9fd;transform:rotate(-24deg) scaleY(.36);filter:blur(5px);box-shadow:0 0 28px #bb8cff,0 0 70px #7e4fcf;animation:bhSpin 8s linear infinite}
+.bh-ring.two{inset:27% -2%;border-width:8px;border-top-color:#ffb0db;border-bottom-color:#9c8cff;transform:rotate(22deg) scaleY(.32);animation-duration:13s;animation-direction:reverse;filter:blur(2px)}
+.bh-core{position:absolute;inset:30%;border-radius:50%;background:radial-gradient(circle at 35% 35%,#181322,#020207 65%);box-shadow:0 0 0 14px #090710,0 0 40px 25px #020207,0 0 100px #8d55cb55}
+@keyframes bhSpin{to{rotate:360deg}}
+.section{padding:100px 9vw;max-width:1500px;margin:auto}
+.section-top{display:flex;justify-content:space-between;align-items:end;gap:25px;margin-bottom:38px}
+.kicker{font:10px 'DM Mono',monospace;color:var(--pink);letter-spacing:.2em;text-transform:uppercase;margin-bottom:14px}
+h2{font:600 clamp(34px,5vw,62px)/1.02 'Space Grotesk',sans-serif;letter-spacing:-.055em}
+.section-intro{max-width:430px;color:var(--muted);font-size:13px;line-height:1.8}
+.about-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:18px}
+.glass{background:linear-gradient(135deg,#171527c9,#0c0c16d9);border:1px solid #ffffff18;border-radius:18px;padding:28px;box-shadow:0 18px 60px #0003}
+.glass h3{font:13px 'DM Mono',monospace;letter-spacing:.14em;text-transform:uppercase;color:var(--cyan);margin-bottom:16px}
+.glass p{font-size:14px;line-height:1.9;color:var(--muted)}
+.facts{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.fact{padding:14px;border-radius:12px;background:#ffffff08;border:1px solid #ffffff10}
+.fact small{display:block;color:#918ba9;font:9px 'DM Mono',monospace;letter-spacing:.12em;text-transform:uppercase;margin-bottom:7px}
+.fact strong{font-size:13px;font-weight:600}
+.planets{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:24px}
+.planet-card{position:relative;min-height:335px;border-radius:20px;overflow:hidden;border:1px solid #ffffff22;background:#111;isolation:isolate;transition:transform .35s,border-color .35s,box-shadow .35s}
+.planet-card:hover{transform:translateY(-8px);border-color:#c2a7ff;box-shadow:0 18px 50px #7d5bc333}
+.planet-card:before{content:"";position:absolute;inset:0;z-index:-2;background-image:var(--planet-image);background-size:cover;background-position:center;transition:transform .6s;filter:saturate(.85)}
+.planet-card:hover:before{transform:scale(1.08)}
+.planet-card:after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,#08081215 0%,#08081270 35%,#080812f5 100%)}
+.planet-content{position:absolute;inset:auto 0 0;padding:22px}
+.planet-index{font:9px 'DM Mono',monospace;color:var(--cyan);letter-spacing:.16em}
+.planet-card h3{font:600 25px 'Space Grotesk',sans-serif;margin:9px 0}
+.planet-card p{font-size:12px;line-height:1.75;color:#d0cddd}
+.planet-tag{display:inline-block;margin-top:14px;padding:7px 10px;border:1px solid #ffffff40;border-radius:30px;color:#e6dcff;font:9px 'DM Mono',monospace;letter-spacing:.08em}
+.food-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.food-card{min-height:230px;border-radius:16px;overflow:hidden;position:relative;display:flex;align-items:end;padding:20px;border:1px solid #ffffff20;background-size:cover;background-position:center}
+.food-card:before{content:"";position:absolute;inset:0;background:linear-gradient(0deg,#090811ed,transparent 85%)}
+.food-card div{position:relative}.food-card h3{font:600 22px 'Space Grotesk',sans-serif}.food-card p{font-size:11px;color:#d2ccdf;margin-top:5px}
+.quote{padding:100px 9vw;text-align:center;background:radial-gradient(ellipse at center,#3b255a55,transparent 65%)}
+.quote p{max-width:850px;margin:20px auto 0;font:italic clamp(24px,4vw,43px)/1.35 'Space Grotesk',sans-serif;color:#e8ddff}
+.quote .mono{font-size:10px;color:var(--pink)}
+footer{padding:30px 9vw;border-top:1px solid #ffffff16;display:flex;justify-content:space-between;gap:15px;flex-wrap:wrap;color:#8e899e;font:10px 'DM Mono',monospace;letter-spacing:.1em}
+.music-toggle{position:fixed;z-index:60;right:22px;bottom:20px;padding:12px 15px;border-radius:999px;border:1px solid #bba2ff88;background:#100d1be8;color:#e8dcff;font:10px 'DM Mono',monospace;letter-spacing:.1em;backdrop-filter:blur(12px);cursor:pointer}
+.music-toggle:hover{background:#a78bfa;color:#090711}
+.solar-cursor{position:fixed;z-index:1000;left:0;top:0;width:48px;height:48px;pointer-events:none;transform:translate(-50%,-50%);display:none}
+.solar-cursor .sun{position:absolute;left:50%;top:50%;width:9px;height:9px;border-radius:50%;background:#ffd36e;box-shadow:0 0 12px #ffd36e,0 0 22px #ff9b5c;transform:translate(-50%,-50%)}
+.cursor-orbit{position:absolute;inset:3px;border:1px solid #bca5ff99;border-radius:50%;animation:cursorSpin 4s linear infinite}
+.cursor-orbit.second{inset:-4px;transform:rotate(65deg) scaleY(.5);animation-duration:6s;animation-direction:reverse;border-color:#8be9fd99}
+.cursor-planet{position:absolute;top:-3px;left:50%;width:6px;height:6px;border-radius:50%;background:#8be9fd;box-shadow:0 0 9px #8be9fd}
+.cursor-orbit.second .cursor-planet{background:#ff8fc7;top:auto;bottom:-3px;left:15%}
+@keyframes cursorSpin{to{rotate:360deg}}
+.reveal{opacity:0;transform:translateY(22px);transition:opacity .7s ease,transform .7s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+
+/* Polished celestial editorial layer */
+:root{--violet:#b7a0ff;--cyan:#9beaff;--pink:#ffacd8;--gold:#f5d69a}
+body{background-color:#05040b;background-image:radial-gradient(ellipse at 50% 0%,#24183d55,transparent 48%)}
+nav{background:linear-gradient(180deg,#090812ed,#090812c9);box-shadow:0 8px 35px #0005}
+.brand{font-size:17px;letter-spacing:.13em}.brand span{color:#bda8ff}
+.hero:after{content:"✦  ✧       ·       ✦";position:absolute;left:9vw;bottom:38px;color:#c7b6ff66;font:11px 'DM Mono',monospace;letter-spacing:1.1em;pointer-events:none}
+.eyebrow{color:#b9f1ff}.hero-copy{font-size:15px;max-width:510px}
+.profile-orbit{background:radial-gradient(circle,#9a7be512,transparent 68%);box-shadow:0 0 100px #9b78f329,inset 0 0 50px #8d6bdb13}
+.section{position:relative}
+.section-top{border-bottom:1px solid #ffffff16;padding-bottom:22px}
+.kicker{color:#ffacd8}
+.glass{background:linear-gradient(145deg,#1b1830d9,#0b0b15e8);border-color:#c5b4ff2a;box-shadow:0 20px 70px #0005,inset 0 1px #ffffff0b}
+.glass h3{color:#a9eaff}
+.planet-card{min-height:365px;border-radius:24px;border-color:#c9baff30;box-shadow:0 14px 45px #0005}
+.planet-card:before{filter:saturate(.9) contrast(1.06)}
+.planet-card:after{background:linear-gradient(180deg,#08081205 0%,#08081255 38%,#080812f2 100%)}
+.planet-content{padding:25px}
+.planet-index{color:#a9edff}
+.planet-card h3{font-size:27px;text-shadow:0 2px 18px #0009}
+.planet-card p{font-size:12.5px;color:#e0dceb}
+.planet-tag{border-color:#c4b4ff55;background:#100d1b99;color:#e9e0ff}
+.planet-card:nth-child(2){box-shadow:inset 0 0 0 1px #8be9fd16,0 14px 45px #0005}
+.food-card{border-radius:20px;box-shadow:0 15px 40px #0005}
+/* Animated orbital timeline */
+.timeline-intro{max-width:580px;color:var(--muted);font-size:13px;line-height:1.85;margin-top:18px}
+.space-timeline{position:relative;margin:48px auto 0;max-width:980px;padding:8px 0 8px 54px}
+.space-timeline:before{content:"";position:absolute;left:18px;top:0;bottom:0;width:2px;background:linear-gradient(180deg,transparent,#9b82ef,#8be9fd,#ffacd8,#9b82ef,transparent);box-shadow:0 0 18px #a78bfa77}
+.timeline-stop{position:relative;margin:0 0 22px;padding:24px 26px;border:1px solid #ffffff20;border-radius:18px;background:linear-gradient(120deg,#171426dc,#0b0b15e8);box-shadow:0 16px 45px #0004;overflow:hidden;opacity:0;transform:translateX(24px);transition:opacity .75s ease,transform .75s ease,border-color .3s}
+.timeline-stop.visible{opacity:1;transform:translateX(0)}
+.timeline-stop:hover{border-color:#bba6ff88;transform:translateX(5px)}
+.timeline-stop:before{content:"";position:absolute;left:-45px;top:31px;width:13px;height:13px;border-radius:50%;background:var(--stop-color,#b7a0ff);box-shadow:0 0 0 6px #a78bfa20,0 0 24px var(--stop-color,#b7a0ff)}
+.timeline-stop:after{content:"";position:absolute;right:-45px;top:-75px;width:180px;height:180px;border-radius:50%;border:1px solid #b7a0ff1c;box-shadow:0 0 45px #9c7be611;pointer-events:none}
+.timeline-meta{font:9px 'DM Mono',monospace;letter-spacing:.18em;text-transform:uppercase;color:var(--stop-color,#b7a0ff)}
+.timeline-stop h3{font:600 23px 'Space Grotesk',sans-serif;margin:9px 0 7px}
+.timeline-stop p{max-width:700px;color:#c5c0d3;font-size:13px;line-height:1.8}
+.timeline-stop .timeline-note{display:inline-block;margin-top:13px;color:#eee7ff;font:9px 'DM Mono',monospace;letter-spacing:.12em;text-transform:uppercase}
+.timeline-stop:nth-child(even){margin-left:55px}
+.timeline-stop:nth-child(1){--stop-color:#9beaff}.timeline-stop:nth-child(2){--stop-color:#b7a0ff}.timeline-stop:nth-child(3){--stop-color:#ffacd8}.timeline-stop:nth-child(4){--stop-color:#f5d69a}.timeline-stop:nth-child(5){--stop-color:#9beaff}.timeline-stop:nth-child(6){--stop-color:#b7a0ff}.timeline-stop:nth-child(7){--stop-color:#ffacd8}.timeline-stop:nth-child(8){--stop-color:#f5d69a}
+.timeline-orbit{position:absolute;right:5%;top:40px;width:130px;height:130px;border:1px solid #b7a0ff36;border-radius:50%;animation:slowSpin 30s linear infinite;pointer-events:none}
+.timeline-orbit:before,.timeline-orbit:after{content:"";position:absolute;border:1px solid #8be9fd38;border-radius:50%;inset:20px;transform:rotateX(65deg)}
+.timeline-orbit:after{inset:-12px;transform:rotateX(70deg) rotate(55deg);border-color:#ffacd833}
+@media(max-width:700px){.space-timeline{padding-left:38px}.space-timeline:before{left:12px}.timeline-stop{padding:20px;margin-left:0!important}.timeline-stop:before{left:-32px}.timeline-orbit{width:75px;height:75px;right:7%;top:70px;opacity:.5}.hero:after{display:none}}
+@media(prefers-reduced-motion:reduce){.timeline-stop{opacity:1;transform:none}}
+
+@media(hover:hover) and (pointer:fine){body,a,button{cursor:none}.solar-cursor{display:block}}
+@media(max-width:1000px){.planets{grid-template-columns:repeat(2,minmax(0,1fr))}.blackhole{right:-10%;width:55vw;opacity:.48}.hero-inner{grid-template-columns:1fr .7fr}.profile-orbit{width:min(36vw,330px)}}
+@media(max-width:700px){nav{height:66px;padding:0 6vw}.menu{display:block}.navlinks{display:none;position:absolute;top:66px;left:0;right:0;padding:22px 6vw;background:#080811f5;border-bottom:1px solid #ffffff20;flex-direction:column;gap:18px}.navlinks.open{display:flex}.hero{padding:120px 7vw 70px}.hero-inner{grid-template-columns:1fr;gap:50px}.profile-wrap{grid-row:1;justify-content:flex-start}.profile-orbit{width:220px}.blackhole{width:85vw;right:-30%;top:30%;opacity:.35}.section{padding:75px 7vw}.section-top{display:block}.section-intro{margin-top:16px}.about-grid{grid-template-columns:1fr}.food-grid{grid-template-columns:1fr}.food-card{min-height:190px}}
+@media(max-width:480px){h1{font-size:66px}.planets{grid-template-columns:1fr}.planet-card{min-height:300px}.facts{grid-template-columns:1fr 1fr}.music-toggle{right:12px;bottom:12px}.quote{padding:80px 7vw}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important;scroll-behavior:auto!important}.reveal{opacity:1;transform:none}}
+
+/* Desktop hero spacing refinement */
+@media(min-width:1001px){
+  .hero-inner{
+    max-width:1350px;
+    grid-template-columns:minmax(0,1.15fr) minmax(350px,.85fr);
+    gap:3vw;
+  }
+  .profile-orbit{width:min(30vw,350px)}
+  .blackhole{
+    width:min(38vw,500px);
+    right:-6%;
+    opacity:.56;
+  }
+}
+
+</style>
+</head>
+<body>
+<div id="starfield"></div><div class="ambient one"></div><div class="ambient two"></div>
+<div class="solar-cursor" aria-hidden="true"><div class="sun"></div><div class="cursor-orbit"><i class="cursor-planet"></i></div><div class="cursor-orbit second"><i class="cursor-planet"></i></div></div>
+<button class="music-toggle" id="musicToggle" type="button">♫ <span id="musicLabel">PLAY SOUNDTRACK</span></button>
+<audio id="bgMusic" loop preload="none"><source src="music.mp3" type="audio/mpeg"></audio>
+
+<nav>
+  <a class="brand" href="#home">NAFIS<span> / ORBIT</span></a>
+  <button class="menu" id="menuBtn" type="button" aria-label="Open navigation">☰</button>
+  <div class="navlinks" id="navLinks">
+    <a href="#about">About</a><a href="#planets">Interests</a><a href="#timeline">Timeline</a><a href="#comfort">Comfort food</a>
+  </div>
+</nav>
+
+<header class="hero" id="home">
+  <div class="blackhole" aria-hidden="true"><div class="bh-glow"></div><div class="bh-ring"></div><div class="bh-ring two"></div><div class="bh-core"></div></div>
+  <div class="hero-inner">
+    <div class="hero-text">
+      <div class="eyebrow">A little universe called mine</div>
+      <h1>HELLO,<br>I'M <span>NAFIS.</span></h1>
+      <p class="hero-copy">Part-time human, full-time fiction nerd. I collect stories, questions, strange worlds and rabbit holes — from the psychology of people to the mysteries of space.</p>
+      <div class="hero-meta"><span class="pill">✦ FICTION WRITER</span><span class="pill">✦ SPACE ENTHUSIAST</span><span class="pill">✦ STRATEGY LOVER</span></div>
+      <div class="hero-actions"><a class="btn primary" href="#planets">Explore my universe ↘</a><a class="btn secondary" href="#about">Get to know me</a></div>
+    </div>
+    <div class="profile-wrap">
+      <div class="profile-orbit">
+        <div class="profile"><img src="pfp.png" alt="Nafis's profile picture" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="profile-fallback">N.</div></div>
+        <span class="orbit-dot"></span>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section class="section" id="about">
+  <div class="section-top reveal"><div><div class="kicker">01 / Earth — personal log</div><h2>So, who am I?</h2></div><p class="section-intro">A curious mind with too many tabs open. Here's the short version of the person behind these many little worlds.</p></div>
+  <div class="about-grid">
+    <article class="glass reveal"><h3>THE HUMAN BEHIND THE UNIVERSE</h3><p>I'm Nafis. I love writing fiction and getting lost in ideas — especially psychology, astronomy, dark fantasy and strategic games. I enjoy video games, exploring political debates and learning about the history of wars. I’m a fiction nerd at heart, always imagining another world or wondering how this one works.</p></article>
+    <article class="glass reveal"><h3>MISSION DETAILS</h3><div class="facts">
+      <div class="fact"><small>Name</small><strong>Nafis</strong></div>
+      <div class="fact"><small>Birthday</small><strong>19 August</strong></div>
+      <div class="fact"><small>Main hobby</small><strong>Writing fiction</strong></div>
+      <div class="fact"><small>Current orbit</small><strong>Curiosity</strong></div>
+    </div></article>
+  </div>
+</section>
+
+<section class="section" id="planets">
+  <div class="section-top reveal"><div><div class="kicker">02 / The solar system — interests</div><h2>Planets of my mind.</h2></div><p class="section-intro">Each planet holds a different interest. Pick a world and take a little look around.</p></div>
+  <div class="planets">
+    <article class="planet-card reveal" style="--planet-image:url('https://images.unsplash.com/photo-1559757175-0eb30cd8c063?auto=format&fit=crop&w=900&q=85')"><div class="planet-content"><div class="planet-index">PLANET 01 / THE HUMAN MIND</div><h3>Psychology</h3><p>People, behaviour, emotions and the strange patterns behind the way we think.</p><span class="planet-tag">UNDERSTAND THE MIND</span></div></article>
+    <article class="planet-card reveal" style="--planet-image:url('https://images.unsplash.com/photo-1462331940025-496dfbfc7564?auto=format&fit=crop&w=900&q=85')"><div class="planet-content"><div class="planet-index">PLANET 02 / THE COSMOS</div><h3>Space & astronomy</h3><p>Galaxies, stars, black holes and the enormous universe beyond our little world.</p><span class="planet-tag">INTO THE UNKNOWN</span></div></article>
+    <article class="planet-card reveal" style="--planet-image:url('https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=900&q=85')"><div class="planet-content"><div class="planet-index">PLANET 03 / IMAGINED REALMS</div><h3>Dark fantasy</h3><p>Ancient secrets, eerie kingdoms, impossible creatures and beautiful darkness.</p><span class="planet-tag">DARK WORLDS / DEEP LORE</span></div></article>
+    <article class="planet-card reveal" style="--planet-image:url('https://images.unsplash.com/photo-1455390582262-044cdead277a?auto=format&fit=crop&w=900&q=85')"><div class="planet-content"><div class="planet-index">PLANET 04 / THE WRITER'S ROOM</div><h3>Fiction writing</h3><p>My favourite hobby: building characters, inventing worlds and turning ideas into stories.</p><span class="planet-tag">AUTHOR IN PROGRESS</span></div></article>
+    <article class="planet-card reveal" style="--planet-image:url('https://images.unsplash.com/photo-1586165368502-1bad197a6461?auto=format&fit=crop&w=900&q=85')"><div class="planet-content"><div class="planet-index">PLANET 05 / THE STRATEGIST</div><h3>Chess & strategy</h3><p>Planning ahead, reading patterns and enjoying the challenge of a clever move.</p><span class="planet-tag">THINK BEFORE YOU MOVE</span></div></article>
+    <article class="planet-card reveal" style="--planet-image:url('https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=900&q=85')"><div class="planet-content"><div class="planet-index">PLANET 06 / DIGITAL WORLDS</div><h3>Video games</h3><p>Interactive worlds, memorable stories, exploration and a good challenge.</p><span class="planet-tag">PLAYER MODE</span></div></article>
+    <article class="planet-card reveal" style="--planet-image:url('https://images.unsplash.com/photo-1529107386315-e1a2ed48a620?auto=format&fit=crop&w=900&q=85')"><div class="planet-content"><div class="planet-index">PLANET 07 / IDEAS & POWER</div><h3>Politics</h3><p>Controversial questions, political ideas and competing perspectives. I like examining arguments, not switching off my curiosity.</p><span class="planet-tag">QUESTION THE SYSTEMS</span></div></article>
+    <article class="planet-card reveal" style="--planet-image:url('https://images.unsplash.com/photo-146 často?auto=format&fit=crop&w=900&q=85')"><div class="planet-content"><div class="planet-index">PLANET 08 / HISTORY FILES</div><h3>War history</h3><p>Sometimes I study wars through their history, strategy, decisions and consequences.</p><span class="planet-tag">HISTORY / STRATEGY / CONTEXT</span></div></article>
+  </div>
+</section>
+
+
+<section class="section" id="timeline">
+  <div class="section-top reveal"><div><div class="kicker">03 / A journey through the mind</div><h2>My orbit, in motion.</h2></div><p class="section-intro">Eight stops, eight different kinds of curiosity. This is how my interests connect — from understanding people to inventing entire worlds.</p></div>
+  <div class="timeline-orbit" aria-hidden="true"></div>
+  <div class="space-timeline">
+    <article class="timeline-stop reveal"><div class="timeline-meta">STOP 01 · THE INNER UNIVERSE</div><h3>Psychology — decoding the human mind</h3><p>I’m interested in why people think, feel and behave the way they do. Psychology opens a window into emotions, personality, decisions and the patterns that make every person different.</p><span class="timeline-note">Curiosity: what makes us who we are?</span></article>
+    <article class="timeline-stop reveal"><div class="timeline-meta">STOP 02 · BEYOND EARTH</div><h3>Space & astronomy — looking outward</h3><p>Stars, galaxies, nebulae and black holes make the universe feel wonderfully enormous. Astronomy lets me explore questions about what exists beyond Earth and how much is still waiting to be discovered.</p><span class="timeline-note">Destination: the unknown</span></article>
+    <article class="timeline-stop reveal"><div class="timeline-meta">STOP 03 · THE SHADOW REALM</div><h3>Dark fantasy — finding beauty in mystery</h3><p>I’m drawn to imagined worlds filled with ancient legends, mysterious places, strange creatures and difficult choices. Dark fantasy creates an atmosphere where wonder and danger can exist side by side.</p><span class="timeline-note">Atmosphere: mysterious · magical · cinematic</span></article>
+    <article class="timeline-stop reveal"><div class="timeline-meta">STOP 04 · THE CREATION ENGINE</div><h3>Fiction writing — building worlds of my own</h3><p>Writing fiction is my favourite hobby. I enjoy creating characters, shaping settings, developing conflicts and turning scattered ideas into stories. It’s where imagination becomes something I can actually share.</p><span class="timeline-note">Main hobby: writing fiction</span></article>
+    <article class="timeline-stop reveal"><div class="timeline-meta">STOP 05 · THE STRATEGY NEBULA</div><h3>Chess & strategy — thinking several moves ahead</h3><p>Strategic games appeal to the part of me that enjoys patterns, planning and weighing possibilities. A good strategy is more than a quick move — it’s seeing how one decision can change what comes next.</p><span class="timeline-note">Focus: patience · patterns · planning</span></article>
+    <article class="timeline-stop reveal"><div class="timeline-meta">STOP 06 · DIGITAL GALAXIES</div><h3>Video games — exploring interactive worlds</h3><p>Games combine exploration, challenges, atmosphere and storytelling. I like the feeling of stepping into a designed world and discovering how its systems, characters and choices fit together.</p><span class="timeline-note">Mode: explore / discover / play</span></article>
+    <article class="timeline-stop reveal"><div class="timeline-meta">STOP 07 · THE DEBATE CONSTELLATION</div><h3>Politics — questioning ideas and systems</h3><p>I’m interested in controversial political questions and the different ideas people have about society and power. Looking at more than one perspective makes it easier to understand why debates become complicated.</p><span class="timeline-note">Approach: question · compare · think critically</span></article>
+    <article class="timeline-stop reveal"><div class="timeline-meta">STOP 08 · THE HISTORY ARCHIVE</div><h3>War history — learning from the past</h3><p>Sometimes I study wars as historical events: the decisions leaders made, the societies involved, the strategies used and the consequences for ordinary people. Context matters as much as the events themselves.</p><span class="timeline-note">Lens: history · decisions · consequences</span></article>
+  </div>
+</section>
+
+<section class="section" id="comfort">
+  <div class="section-top reveal"><div><div class="kicker">04 / The comfort constellation</div><h2>Fuel for the astronaut.</h2></div><p class="section-intro">Every explorer needs a few favourites. These are some of mine.</p></div>
+  <div class="food-grid">
+    <article class="food-card reveal" style="background-image:url('https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=900&q=85')"><div><h3>Strawberry cake</h3><p>A sweet spot in the universe. 🍓</p></div></article>
+    <article class="food-card reveal" style="background-image:url('https://images.unsplash.com/photo-1529006557810-274b9b2fc783?auto=format&fit=crop&w=900&q=85')"><div><h3>Shawarma</h3><p>Always a good idea.</p></div></article>
+    <article class="food-card reveal" style="background-image:url('https://images.unsplash.com/photo-1563379091339-03246963d96c?auto=format&fit=crop&w=900&q=85')"><div><h3>Biriyani</h3><p>Certified comfort food. ✨</p></div></article>
+  </div>
+</section>
+
+<section class="quote reveal"><div class="mono">A NOTE FROM THE WRITER</div><p>“Some people explore the world. I explore worlds that don't exist — then write them down.”</p></section>
+<footer><span>NAFIS / PERSONAL UNIVERSE</span><span>MADE OF STARDUST & STORIES ✦</span></footer>
+
+<script>
+(() => {
+  const audio = document.getElementById('bgMusic');
+  const toggle = document.getElementById('musicToggle');
+  const label = document.getElementById('musicLabel');
+  const updateMusic = () => {
+    const playing = !audio.paused;
+    label.textContent = playing ? 'SOUNDTRACK ON' : 'PLAY SOUNDTRACK';
+    toggle.setAttribute('aria-label', playing ? 'Pause background music' : 'Play background music');
+  };
+  toggle.addEventListener('click', async () => {
+    if (audio.paused) {
+      try { await audio.play(); } catch (err) { label.textContent = 'ADD music.mp3'; }
+    } else { audio.pause(); }
+    updateMusic();
+  });
+  audio.addEventListener('play', updateMusic);
+  audio.addEventListener('pause', updateMusic);
+
+  const cursor = document.querySelector('.solar-cursor');
+  if (cursor && window.matchMedia('(hover:hover) and (pointer:fine)').matches) {
+    window.addEventListener('pointermove', e => {
+      cursor.style.left = e.clientX + 'px';
+      cursor.style.top = e.clientY + 'px';
+    }, {passive:true});
+  }
+
+  const menu = document.getElementById('menuBtn');
+  const links = document.getElementById('navLinks');
+  menu.addEventListener('click', () => links.classList.toggle('open'));
+  links.querySelectorAll('a').forEach(link => link.addEventListener('click', () => links.classList.remove('open')));
+
+  const revealItems = document.querySelectorAll('.reveal');
+  if ('IntersectionObserver' in window) {
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, {threshold:0.12});
+    revealItems.forEach(item => observer.observe(item));
+  } else {
+    revealItems.forEach(item => item.classList.add('visible'));
+  }
+})();
+</script>
+</body>
+</html>
